@@ -1,0 +1,220 @@
+/* ════════════════════════════════════════════════════════════════════
+   shared-ui.css — اجزای پایهٔ مشترک خانوادهٔ اپ‌های فارسی (نسخهٔ ۱)
+   قابل استفاده در هر اپ لوکال راست‌به‌چپ: توکن‌ها، دکمه، ورودی، بخش، پنجره، پیام.
+   فونت: خانوادهٔ Khamenei.ir (۴۰۰/۷۰۰/۹۰۰)؛ سلسله‌مراتب فقط با وزن و اندازه.
+   تیره/روشن: پیش‌فرض تابع سیستم؛ انتخاب کاربر روی html[data-theme] نوشته می‌شود.
+   جزئیات و جدول توکن‌ها: docs/design-tokens.md
+   ════════════════════════════════════════════════════════════════════ */
+@font-face{font-family:"Vazirmatn";src:url("./fonts/Vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:swap}
+
+/* ───── توکن‌ها: روشن ───── */
+:root{
+  color-scheme:light;
+  /* سطح‌ها */
+  --bg:#dde1e8;          /* میز کار / پس‌زمینهٔ پشت محتوا */
+  --surf:#f6f7f9;        /* ستون‌ها و نوارها */
+  --surf-2:#eceef3;      /* زمینهٔ ورودی و گروه دکمه */
+  --surf-3:#e2e5ec;      /* hover */
+  --raised:#ffffff;      /* کارت، پنجره، منو */
+  --line:#d3d8e2;        /* جداکنندهٔ ظریف */
+  --field-line:#858da2;  /* لبهٔ ورودی (≥۳:۱) */
+  /* متن */
+  --ink:#141a2e;--mut:#4b5470;--mut-2:#5f6884;
+  /* رنگ‌های معنادار */
+  --pri:#2442c2;--pri-h:#1b35a3;--pri-ink:#ffffff;--pri-soft:#e3e8fb;--pri-line:#a9b7ef;
+  --accent:#0a756d;--accent-soft:#dcf1ee;
+  --danger:#b42338;--danger-soft:#fbe7ea;
+  --warn:#8a5a00;--warn-soft:#fdf1d6;
+  /* شکل */
+  --r-1:6px;--r-2:10px;--r-3:14px;--r-4:20px;--r-full:999px;
+  --sh-1:0 1px 2px rgba(20,26,46,.08);
+  --sh-2:0 4px 14px rgba(20,26,46,.10),0 1px 3px rgba(20,26,46,.08);
+  --sh-3:0 18px 48px rgba(20,26,46,.22),0 2px 8px rgba(20,26,46,.10);
+  --focus:0 0 0 3px color-mix(in srgb,var(--pri) 38%,transparent);
+  /* فاصله (پایهٔ ۴px) */
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:20px;--s-6:24px;--s-8:32px;
+  /* اندازهٔ کنترل */
+  --ctl-sm:36px;--ctl:40px;--ctl-lg:44px;
+  /* حرکت */
+  --t-fast:120ms;--t:180ms;--ease:cubic-bezier(.2,.7,.3,1);
+  /* نوشته */
+  --font:"Vazirmatn",Tahoma,"Segoe UI",Arial,sans-serif;
+  --fs-xs:.75rem;--fs-sm:.8125rem;--fs-base:.875rem;--fs-md:1rem;--fs-lg:1.125rem;--fs-xl:1.375rem;
+}
+/* ───── توکن‌ها: تیره ───── */
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#0b0f1c;--surf:#131a2c;--surf-2:#1a2238;--surf-3:#232c47;--raised:#182036;--line:#273152;--field-line:#606c94;
+  --ink:#eef1f8;--mut:#aab3cb;--mut-2:#929cb8;
+  --pri:#8ea3ff;--pri-h:#a9b8ff;--pri-ink:#0b1230;--pri-soft:#232e5e;--pri-line:#46569a;
+  --accent:#4fd6ca;--accent-soft:#12302d;
+  --danger:#ff95a2;--danger-soft:#3b1d28;
+  --warn:#f3c66b;--warn-soft:#3a2e12;
+  --sh-1:0 1px 2px rgba(0,0,0,.45);--sh-2:0 6px 20px rgba(0,0,0,.45);--sh-3:0 22px 60px rgba(0,0,0,.6);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    color-scheme:dark;
+    --bg:#0b0f1c;--surf:#131a2c;--surf-2:#1a2238;--surf-3:#232c47;--raised:#182036;--line:#273152;--field-line:#606c94;
+    --ink:#eef1f8;--mut:#aab3cb;--mut-2:#929cb8;
+    --pri:#8ea3ff;--pri-h:#a9b8ff;--pri-ink:#0b1230;--pri-soft:#232e5e;--pri-line:#46569a;
+    --accent:#4fd6ca;--accent-soft:#12302d;
+    --danger:#ff95a2;--danger-soft:#3b1d28;
+    --warn:#f3c66b;--warn-soft:#3a2e12;
+    --sh-1:0 1px 2px rgba(0,0,0,.45);--sh-2:0 6px 20px rgba(0,0,0,.45);--sh-3:0 22px 60px rgba(0,0,0,.6);
+  }
+}
+
+/* ───── پایه ───── */
+*,*::before,*::after{box-sizing:border-box}
+*{-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-base)/1.7 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:0}
+button{cursor:pointer;border:0;background:none;padding:0}
+button:disabled{cursor:not-allowed}
+h1,h2,h3,h4,p,ol,dl,dd{margin:0}
+small{font-size:var(--fs-xs)}
+:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+svg.i{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+svg.i.flip{transform:none}
+kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border:1px solid var(--line);border-bottom-width:2px;border-radius:var(--r-1);background:var(--raised);font:700 var(--fs-xs)/1 var(--font);direction:ltr}
+
+/* ───── دکمه‌ها ───── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);min-height:var(--ctl);padding:0 var(--s-4);border-radius:var(--r-2);font-weight:700;font-size:var(--fs-base);line-height:1.25;white-space:nowrap;transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast)}
+.btn.sm{min-height:var(--ctl-sm);padding:0 var(--s-3);font-size:var(--fs-sm)}
+.btn.full{width:100%}
+.btn:disabled{opacity:.45}
+.btn-primary{background:var(--pri);color:var(--pri-ink);box-shadow:var(--sh-1)}
+.btn-primary:hover:not(:disabled){background:var(--pri-h)}
+.btn-soft{background:var(--surf-2);color:var(--ink);border:1px solid var(--line)}
+.btn-soft:hover:not(:disabled){background:var(--surf-3)}
+.btn-soft[aria-pressed=true]{background:var(--pri-soft);border-color:var(--pri-line);color:var(--pri)}
+.btn-quiet{color:var(--ink)}
+.btn-quiet:hover:not(:disabled){background:var(--surf-3)}
+.btn-danger-soft{background:var(--danger-soft);color:var(--danger)}
+.btn-danger-soft:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--danger)}
+.btn-danger-text{color:var(--danger)}
+.btn-danger-text:hover:not(:disabled){background:var(--danger-soft)}
+.btn.danger,.btn-primary.danger{background:var(--danger);color:#fff}
+:root[data-mode=dark] .btn-primary.danger{color:#2a0910}
+.btn-link{min-height:var(--ctl);padding:0 var(--s-2);color:var(--pri);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.icon-btn{display:inline-grid;place-items:center;width:var(--ctl);height:var(--ctl);flex:none;border-radius:var(--r-2);color:var(--ink);transition:background var(--t-fast),color var(--t-fast)}
+.icon-btn.sm{width:var(--ctl-sm);height:var(--ctl-sm)}
+.icon-btn:hover:not(:disabled){background:var(--surf-3)}
+.icon-btn:disabled{opacity:.35}
+.icon-btn[aria-pressed=true]{background:var(--pri-soft);color:var(--pri)}
+.icon-btn.danger{color:var(--danger)}
+.icon-btn.danger:hover:not(:disabled){background:var(--danger-soft)}
+.btn-group{display:inline-flex;gap:2px;padding:2px;border-radius:var(--r-2);background:var(--surf-2)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.btn-row>.btn{flex:1 1 0;min-width:max-content}
+
+/* ───── ورودی‌ها ───── */
+.select,input[type=number],input[type=text]{width:100%;height:var(--ctl);padding:0 var(--s-3);border:1px solid var(--field-line);border-radius:var(--r-2);background:var(--raised);color:var(--ink);font-size:var(--fs-base);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.select{appearance:none;-webkit-appearance:none;padding-inline-end:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23858da2' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-position:left 12px center;background-size:16px 16px;background-repeat:no-repeat;cursor:pointer}
+.select:focus,input[type=number]:focus,input[type=text]:focus{outline:0;border-color:var(--pri);box-shadow:var(--focus)}
+.select:disabled,input:disabled{opacity:.5;cursor:not-allowed}
+input[type=number]{direction:ltr;text-align:center;font-variant-numeric:tabular-nums}
+input[type=color]{width:40px;height:32px;padding:2px;border:1px solid var(--field-line);border-radius:var(--r-1);background:var(--raised);cursor:pointer}
+input[type=color]:disabled{opacity:.4;cursor:not-allowed}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;margin:0;background:transparent;cursor:pointer;direction:rtl}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:var(--surf-3)}
+input[type=range]::-moz-range-track{height:4px;border-radius:4px;background:var(--surf-3)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:4px;background:var(--pri)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-7px;border-radius:50%;background:var(--raised);border:2px solid var(--pri);box-shadow:var(--sh-1)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--raised);border:2px solid var(--pri)}
+input[type=range]:focus-visible{outline:0}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:var(--focus)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:var(--focus)}
+input[type=range]:disabled{opacity:.4;cursor:not-allowed}
+.field{display:grid;gap:6px}
+.field>label,.field-label,.range-row label{font-size:var(--fs-sm);font-weight:700;color:var(--mut)}
+.range-row{display:grid;gap:2px}
+.range-row label{display:flex;justify-content:space-between;align-items:center;gap:var(--s-2)}
+.range-row output{min-width:3ch;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;text-align:end}
+.color-row{display:flex;align-items:center;gap:var(--s-3)}
+.color-row label{flex:1;font-size:var(--fs-sm);font-weight:700;color:var(--mut)}
+.color-row span{min-width:64px;font-size:var(--fs-xs);color:var(--mut);text-align:end}
+.hint{font-size:var(--fs-xs);color:var(--mut);line-height:1.8}
+.note-card{padding:var(--s-3);border-radius:var(--r-2);background:var(--surf-2);font-size:var(--fs-sm);color:var(--mut);line-height:1.8}
+.note-card b{display:block;color:var(--ink);font-weight:700}
+.note-card span{display:block}
+.pill{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:var(--r-full);background:var(--surf-2);color:var(--mut);font-size:var(--fs-xs);font-weight:700;white-space:nowrap}
+
+/* گزینهٔ چندتایی (segmented) و تراشه‌ها */
+.segmented{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;padding:3px;border-radius:var(--r-2);background:var(--surf-2)}
+.segmented.wrap{grid-auto-flow:row;grid-template-columns:repeat(3,1fr)}
+.segmented button{min-height:34px;border-radius:calc(var(--r-2) - 3px);font-weight:700;font-size:var(--fs-sm);color:var(--mut);transition:background var(--t-fast),color var(--t-fast)}
+.segmented button:hover:not(:disabled){color:var(--ink);background:var(--surf-3)}
+.segmented button.active,.segmented button[aria-pressed=true]{background:var(--raised);color:var(--pri);box-shadow:var(--sh-1)}
+.segmented button:disabled{opacity:.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{min-height:32px;padding:0 var(--s-3);border-radius:var(--r-full);border:1px solid var(--line);font-size:var(--fs-sm);font-weight:700;color:var(--mut);transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast)}
+.chips button:hover{color:var(--ink);border-color:var(--field-line)}
+.chips button.active{background:var(--ink);border-color:var(--ink);color:var(--surf)}
+
+/* کلید روشن/خاموش */
+.switch{position:relative;display:grid;grid-template-columns:auto 1fr;gap:var(--s-3);align-items:start;padding:var(--s-3);border-radius:var(--r-2);background:var(--surf-2);cursor:pointer}
+.switch input{position:absolute;inset-inline-start:var(--s-3);top:var(--s-3);opacity:0;width:1px;height:1px;margin:0}
+.switch-track{position:relative;width:40px;height:24px;margin-top:2px;border-radius:var(--r-full);background:var(--field-line);transition:background var(--t)}
+.switch-track::after{content:"";position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:var(--sh-1);transition:transform var(--t) var(--ease)}
+.switch input:checked+.switch-track{background:var(--pri)}
+.switch input:checked+.switch-track::after{transform:translateX(-16px)}
+.switch input:focus-visible+.switch-track{box-shadow:var(--focus)}
+.switch-text b{display:block;font-weight:700}
+.switch-text small{display:block;color:var(--mut);line-height:1.7}
+
+/* ───── بخش و جمع‌شونده ───── */
+.panel{display:grid;gap:var(--s-3);padding:var(--s-4);border-radius:var(--r-3);background:var(--raised);border:1px solid var(--line)}
+.panel-title{font-size:var(--fs-md);font-weight:900;line-height:1.5}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-2)}
+details.fold{border-radius:var(--r-2)}
+details.fold>summary{display:flex;align-items:center;gap:var(--s-2);min-height:var(--ctl);padding:0 var(--s-1);list-style:none;cursor:pointer;font-weight:700;border-radius:var(--r-2)}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"";width:8px;height:8px;margin-inline:4px 2px;border-inline-start:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(45deg) translate(-2px,-2px);transition:transform var(--t-fast)}
+details.fold[open]>summary::before{transform:rotate(-45deg) translate(1px,-1px)}
+details.fold>summary:hover{background:var(--surf-2)}
+details.fold .summary-meta{margin-inline-start:auto;font-size:var(--fs-xs);font-weight:400;color:var(--mut)}
+details.fold .fold-body{display:grid;gap:var(--s-3);padding:var(--s-2) var(--s-1) var(--s-1)}
+details.panel.fold>summary{font-size:var(--fs-md);font-weight:900;min-height:28px;padding:0}
+details.panel.fold>summary:hover{background:none;color:var(--pri)}
+
+/* ───── پنجره‌ها ───── */
+dialog{width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:var(--r-4);background:var(--raised);color:var(--ink);box-shadow:var(--sh-3);overflow:auto}
+dialog[open]{animation:dlg-in var(--t) var(--ease)}
+@keyframes dlg-in{from{opacity:0;transform:translateY(8px) scale(.98)}}
+dialog::backdrop{background:rgba(11,15,28,.5)}
+.dialog-card{position:relative;display:grid;gap:var(--s-3);padding:var(--s-6)}
+dialog:has(.dialog-card.wide){width:min(600px,calc(100vw - 24px))}
+.dialog-card h2{font-size:var(--fs-xl);font-weight:900;line-height:1.4;padding-inline-end:44px}
+.dialog-card h3{font-size:var(--fs-md);font-weight:900;margin-top:var(--s-2)}
+.dialog-card>p{color:var(--mut);line-height:1.9}
+.dialog-close{position:absolute;top:var(--s-4);left:var(--s-4)}
+.dialog-actions{display:flex;gap:var(--s-2);margin-top:var(--s-2)}
+.dialog-actions .btn{flex:1;min-height:var(--ctl-lg)}
+
+/* ───── وضعیت ذخیره ───── */
+.save-chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 var(--s-3);border-radius:var(--r-full);background:var(--surf-2);color:var(--mut);font-size:var(--fs-xs);font-weight:700;white-space:nowrap}
+.save-chip::before{content:"";width:7px;height:7px;flex:none;border-radius:50%;background:var(--mut-2)}
+.save-chip[data-state=saved]::before{background:var(--accent)}
+.save-chip[data-state=saving]::before{background:var(--pri)}
+.save-chip[data-state=error],.save-chip[data-state=off]{color:var(--danger);background:var(--danger-soft)}
+.save-chip[data-state=error]::before,.save-chip[data-state=off]::before{background:var(--danger)}
+
+/* ───── لمس: هدف دست‌کم ۴۴ پیکسل ───── */
+@media (pointer:coarse){
+  :root{--ctl-sm:44px;--ctl:44px;--ctl-lg:48px}
+  .segmented button{min-height:44px}
+  .chips button{min-height:44px}
+  details.fold>summary{min-height:44px}
+  input[type=range]{height:44px}
+  input[type=range]::-webkit-slider-thumb{width:24px;height:24px;margin-top:-10px}
+  input[type=color]{width:48px;height:44px}
+}
+/* ───── حرکت کمتر ───── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}

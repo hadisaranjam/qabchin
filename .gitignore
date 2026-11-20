@@ -1,0 +1,13 @@
+node_modules/
+source/dist/
+single-file/
+site/
+test-results/
+playwright-report/
+*.local.*
+.env*
+desktop.ini
+docs/FUNCTION_INDEX.md
+docs/VALIDATION_RESULTS.json
+docs/VALIDATION_FA.md
+SOURCE_PROVENANCE.json

@@ -1,0 +1,38 @@
+{
+  "app": "comic-page-studio",
+  "version": 10,
+  "appVersion": 26,
+  "savedAt": "2026-10-22T00:00:00.000Z",
+  "activePage": 0,
+  "pages": [
+    {
+      "id": "example-page-1",
+      "name": "صفحه ۱",
+      "preset": "vaziri",
+      "paper": "#f6f2e8",
+      "gap": 3,
+      "gutterStyle": "simpleWhite",
+      "gutterColor": "#ffffff",
+      "gutterAccent": "#0e1723",
+      "gutterDetail": 50,
+      "look": {
+        "preset": "original",
+        "brightness": 100,
+        "contrast": 100,
+        "saturation": 100,
+        "hue": 0,
+        "mono": 0
+      },
+      "targetCount": 3,
+      "lastTemplate": "grid",
+      "panels": [],
+      "boundaries": [],
+      "isTiled": false,
+      "magnet": true,
+      "layoutStyle": "regular",
+      "layoutSeed": 1,
+      "templateSig": "",
+      "pageBorder": 0
+    }
+  ]
+}

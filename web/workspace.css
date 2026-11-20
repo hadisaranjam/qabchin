@@ -1,0 +1,48 @@
+/* Web workspace: inherits the editor's accessible light/dark palette. */
+.workspace-button{gap:6px;padding-inline:10px}
+.workspace-dot{width:8px;height:8px;border-radius:50%;background:var(--mut-2);flex:none}
+.workspace-dot[data-state=ok]{background:var(--accent)}
+.workspace-dot[data-state=error]{background:var(--danger)}
+.workspace-dot[data-state=busy]{background:var(--pri);animation:sync-pulse 1s infinite alternate}
+@keyframes sync-pulse{to{opacity:.35}}
+.workspace-dialog{width:min(900px,calc(100vw - 24px));max-width:900px;max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--line);border-radius:20px;background:var(--raised);color:var(--ink);box-shadow:var(--sh-3)}
+.workspace-dialog::backdrop{background:rgb(5 12 30 / .6);backdrop-filter:blur(4px)}
+.workspace-wrap{padding:28px;display:grid;gap:20px;overflow:auto}
+.workspace-head{display:flex;justify-content:space-between;gap:16px;align-items:center}
+.workspace-head h2{font-size:1.4rem;font-weight:900}
+.workspace-head p,.workspace-subtitle{color:var(--mut);font-size:.875rem}
+.workspace-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.workspace-tools input{flex:1;min-width:120px;min-height:42px;border:1px solid var(--field-line);border-radius:10px;padding:8px 12px;background:var(--surf)}
+.workspace-status{padding:12px 16px;background:var(--surf-2);border-radius:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.workspace-status p{flex:1;min-width:140px;font-size:.875rem}
+.workspace-status[data-error=true]{background:var(--danger-soft);color:var(--danger)}
+.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.book-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surf);display:flex;flex-direction:column}
+.book-card[data-active=true]{border:2px solid var(--pri)}
+.book-cover{height:148px;display:grid;place-items:center;background:var(--surf-2);padding:14px;position:relative;overflow:hidden}
+.book-cover svg{height:100%;width:auto;max-width:100%;filter:drop-shadow(0 3px 6px rgb(0 0 0 / .1))}
+.book-cover .cloud-badge{position:absolute;inset-inline-end:10px;top:10px;background:var(--raised);border-radius:20px;padding:2px 8px;font-size:.75rem}
+.book-info{padding:12px;display:grid;gap:8px}
+.book-info h3{font-size:1rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.book-meta{font-size:.75rem;color:var(--mut)}
+.book-actions{display:flex;gap:6px;justify-content:space-between}
+.book-actions .btn{min-height:40px;font-size:.8125rem;padding-inline:12px}
+.workspace-empty{padding:40px;text-align:center;color:var(--mut);grid-column:1/-1;background:var(--surf);border:1px dashed var(--field-line);border-radius:14px}
+.workspace-foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;color:var(--mut);font-size:.75rem}
+.connection-form{display:grid;gap:14px}
+.connection-form label{display:grid;gap:6px;font-size:.875rem;font-weight:700}
+.connection-form input:not([type=checkbox]){width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--field-line);border-radius:10px;background:var(--surf);font-family:inherit}
+.connection-form input[dir=ltr]{font-family:ui-monospace,monospace;font-size:.8125rem}
+.connection-form .check-line{display:flex;align-items:center;gap:8px}
+.connection-help{font-size:.875rem;line-height:1.9;background:var(--surf);padding:16px;border-radius:12px}
+.connection-help ol{padding-inline-start:22px;margin:8px 0}
+.connection-help a{color:var(--pri);font-weight:700;text-decoration:underline}
+.connection-help code{direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;font-size:.8125rem}
+.workspace-error{color:var(--danger);background:var(--danger-soft);border-radius:10px;padding:12px;font-size:.875rem}
+.workspace-dialog .icon-btn{min-width:44px;min-height:44px}
+.sync-conflict{padding:16px;background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;color:var(--ink);display:grid;gap:12px}
+.sync-conflict p{font-size:.875rem}
+.sync-conflict .workspace-tools{justify-content:flex-start}
+@media(min-width:861px) and (max-width:1200px){.workspace-button span.button-copy{display:none}}
+@media(max-width:620px){.workspace-wrap{padding:18px;gap:16px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.book-cover{height:124px}.workspace-head h2{font-size:1.2rem}.workspace-tools .btn{flex:1}.workspace-button{padding-inline:8px}.workspace-button .button-copy{display:none}.workspace-dialog{max-height:calc(100dvh - 16px);width:calc(100vw - 16px)}.book-actions .btn{padding-inline:8px}.workspace-empty{padding:24px}}
+@media(prefers-reduced-motion:reduce){.workspace-dot{animation:none!important}}

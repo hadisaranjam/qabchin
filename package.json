@@ -1,0 +1,13 @@
+{
+  "name": "qabchin-web",
+  "version": "27.0.0",
+  "private": true,
+  "description": "قاب‌چین: وب‌اپ فارسی صفحه‌آرایی کمیک با کتابخانهٔ آفلاین و سینک شخصی",
+  "scripts": {
+    "build": "node tools/build.cjs && node tools/build-web.cjs",
+    "test": "node tools/verify.cjs && node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "start": "node tools/serve.cjs"
+  },
+  "devDependencies": { "@playwright/test": "1.65.1", "fake-indexeddb": "6.2.8" }
+}
